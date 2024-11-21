@@ -1,0 +1,11 @@
+# prod
+dist/
+sqlite.db
+
+# deps
+node_modules/
+.svelte-kit
+
+# env
+.env
+.env.production
