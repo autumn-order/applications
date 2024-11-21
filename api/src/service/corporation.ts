@@ -1,28 +1,36 @@
-import CorporationRepository, { DbCorporation, DbCreateCorporation } from "data/corporation";
-import { DrizzleD1Database } from "drizzle-orm/d1";
-import { getCorporationInfo } from "utils/eve/corporation";
+import CorporationRepository, {
+  DbCorporation,
+  DbCreateCorporation,
+} from "../data/corporation";
+import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { getCorporationInfo } from "../utils/eve/corporation";
 
-export async function createEveCorporation(env: Env, db: DrizzleD1Database<Record<string, never>>, corporation_id: number): Promise<DbCorporation> {
-    const corporationRepository = new CorporationRepository(db)
+export async function createEveCorporation(
+  db: BetterSQLite3Database<Record<string, never>>,
+  corporation_id: number,
+): Promise<DbCorporation> {
+  const corporationRepository = new CorporationRepository(db);
 
-    const existing_corporation = await corporationRepository.getCorporation(corporation_id)
+  const existing_corporation =
+    await corporationRepository.getCorporation(corporation_id);
 
-    if (!existing_corporation) {
-        const corporation = await getCorporationInfo(env, corporation_id)
+  if (!existing_corporation) {
+    const corporation = await getCorporationInfo(corporation_id);
 
-        const new_corporation: DbCreateCorporation = {
-            corporation_id: corporation_id,
-            corporation_name: corporation.name
-        }
+    const new_corporation: DbCreateCorporation = {
+      corporation_id: corporation_id,
+      corporation_name: corporation.name,
+    };
 
-        const created_corporation = await corporationRepository.createCorporation(new_corporation)
+    const created_corporation =
+      await corporationRepository.createCorporation(new_corporation);
 
-        if (!created_corporation) {
-            throw new Error("Failed to create corporation")
-        }
-
-        return created_corporation
+    if (!created_corporation) {
+      throw new Error("Failed to create corporation");
     }
 
-    return existing_corporation
+    return created_corporation;
+  }
+
+  return existing_corporation;
 }

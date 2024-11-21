@@ -1,11 +1,11 @@
 import SeatRoleRepository, {
   DbCreateSeatRole,
   DbSeatRole,
-} from "data/seat_role";
-import SeatRoleUserRepository, { DbSeatUserRole } from "data/seat_user_role";
-import UserRepository from "data/user";
-import { fetchSeatRoleDetails, fetchSeatRoles } from "utils/seat/role";
-import { drizzle, BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+} from "../data/seat_role";
+import SeatRoleUserRepository, { DbSeatUserRole } from "../data/seat_user_role";
+import UserRepository from "../data/user";
+import { fetchSeatRoleDetails, fetchSeatRoles } from "../utils/seat/role";
+import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 
 interface RoleUserEntries {
   role_id: number;

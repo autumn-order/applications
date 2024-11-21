@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import { getOrCreateUser } from "service/auth";
-import { AppHono, Context } from "types";
+import { getOrCreateUser } from "../../service/auth";
+import { AppHono, Context } from "../../types";
 import crypto from "crypto";
 
 function create_oauth_authorization_uri(
@@ -46,8 +46,17 @@ const callbackRoute: AppHono = new Hono();
 const logoutRoute: AppHono = new Hono();
 
 loginRoute.get("/", async (ctx: Context) => {
-  const application_url = ctx.env.APPLICATION_BACKEND_URL;
-  const eve_esi_client_id = ctx.env.EVE_ESI_CLIENT_ID;
+  const application_url = process.env.APPLICATION_BACKEND_URL;
+  const eve_esi_client_id = process.env.EVE_ESI_CLIENT_ID;
+
+  if (!application_url) {
+    throw new Error("APPLICATION_BACKEND_URL is not set");
+  }
+
+  if (!eve_esi_client_id) {
+    throw new Error("EVE_ESI_CLIENT_ID is not set");
+  }
+
   const session = ctx.get("session");
 
   const callback_url = `${application_url}/auth/callback`;
@@ -65,6 +74,22 @@ loginRoute.get("/", async (ctx: Context) => {
 });
 
 callbackRoute.get("/", async (ctx: Context) => {
+  const application_frontend_url = process.env.APPLICATION_FRONTEND_URL;
+  const client_id = process.env.EVE_ESI_CLIENT_ID;
+  const client_secret = process.env.EVE_ESI_SECRET_KEY;
+
+  if (!client_id) {
+    throw new Error("EVE_ESI_CLIENT_ID is not set");
+  }
+
+  if (!client_secret) {
+    throw new Error("EVE_ESI_SECRET_KEY is not set");
+  }
+
+  if (!application_frontend_url) {
+    throw new Error("APPLICATION_FRONTEND_URL is not set");
+  }
+
   const code = ctx.req.query("code");
   const state = ctx.req.query("state");
   const session = ctx.get("session");
@@ -89,9 +114,6 @@ callbackRoute.get("/", async (ctx: Context) => {
     ctx.status(400);
     return ctx.body("Invalid state");
   }
-
-  const client_id = ctx.env.EVE_ESI_CLIENT_ID;
-  const client_secret = ctx.env.EVE_ESI_SECRET_KEY;
 
   const response = await get_access_token(client_id, client_secret, code);
 
@@ -121,7 +143,7 @@ callbackRoute.get("/", async (ctx: Context) => {
   const tokenData: TokenData = await verifyResponse.json();
 
   const user = await getOrCreateUser(
-    ctx.env,
+    ctx.var.db,
     tokenData.CharacterOwnerHash,
     tokenData.CharacterID,
     tokenData.CharacterName,
@@ -129,7 +151,6 @@ callbackRoute.get("/", async (ctx: Context) => {
 
   session.set("user_id", user.id);
 
-  const application_frontend_url = ctx.env.APPLICATION_FRONTEND_URL;
   const apply_page_url = `${application_frontend_url}/application`;
 
   return ctx.redirect(apply_page_url);

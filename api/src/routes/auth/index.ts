@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import { AppHono } from "types";
+import { AppHono } from "../../types";
 
-import { callbackRoute, loginRoute, logoutRoute } from './login';
+import { callbackRoute, loginRoute, logoutRoute } from "./login";
 import userRoute from "./user";
 
 const authRoutes: AppHono = new Hono();

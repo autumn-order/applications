@@ -1,13 +1,13 @@
 import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { and, desc, eq, inArray, sql } from "drizzle-orm";
 
-import * as schema from "schema";
+import * as schema from "../schema";
 import {
   ApplicationInterests,
   ApplicationLanguages,
   ApplicationLocation,
   ApplicationStatus,
-} from "model/application";
+} from "../model/application";
 import { DbUser } from "./user";
 import { DbCharacter } from "./character";
 import { DbCorporation } from "./corporation";
@@ -155,10 +155,12 @@ export default class ApplicationRepository {
       }
     }
 
-    //@ts-ignore TODO: set type
+    //@ts-ignore
     subquery = subquery
       .orderBy(desc(schema.Application.last_updated))
+      //@ts-ignore
       .limit(limit)
+      //@ts-ignore
       .offset(offset);
 
     // Main query to fetch the data

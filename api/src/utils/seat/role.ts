@@ -1,4 +1,4 @@
-import { SeatRoleDetailsResponse, SeatRoleResponse } from "utils/seat/model";
+import { SeatRoleDetailsResponse, SeatRoleResponse } from "./model";
 
 export async function fetchSeatRoles(page: number): Promise<SeatRoleResponse> {
   const seat_domain = process.env.SEAT_DOMAIN;

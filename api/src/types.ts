@@ -1,7 +1,6 @@
 import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { Hono, Context as HonoContext } from "hono";
 import { Session } from "hono-sessions";
-import * as schema from "schema";
 
 export type Result<T> =
   | { success: true; data: T }

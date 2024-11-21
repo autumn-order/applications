@@ -1,8 +1,6 @@
-import { drizzle } from "drizzle-orm/d1";
-
-import { ZkillCorporationStats } from "model/zkill";
-import { Result } from "types";
-import StatsRepository, { CreateStatsEntry } from "data/stats";
+import { ZkillCorporationStats } from "../model/zkill";
+import { Result } from "../types";
+import StatsRepository, { CreateStatsEntry } from "../data/stats";
 import { AUTUMN_CORPORATION_IDS, USER_AGENT } from "../constants";
 import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 
@@ -18,7 +16,7 @@ async function fetchZkillCorporationStats(
   while (attempt < maxRetries) {
     try {
       const headers = {
-        "User-Agent": `${USER_AGENT(env)}`,
+        "User-Agent": `${USER_AGENT()}`,
       };
       const response = await fetch(
         `${ZKILL_CORPORATION_STATS_URL}/${corporationId}/`,
@@ -47,14 +45,13 @@ async function fetchZkillCorporationStats(
 export default async function updateCorporationStats(
   db: BetterSQLite3Database,
 ): Promise<void> {
-  const db = drizzle(env.DB);
   const statsRepository = new StatsRepository(db);
 
   const outdated_corporation_ids =
     await statsRepository.getOutdatedCorporationIds(AUTUMN_CORPORATION_IDS);
 
   for (const corporation_id of outdated_corporation_ids) {
-    const result = await fetchZkillCorporationStats(env, corporation_id);
+    const result = await fetchZkillCorporationStats(corporation_id);
 
     if (result.success) {
       const statsEntry: CreateStatsEntry = {

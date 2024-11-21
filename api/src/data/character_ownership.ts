@@ -1,7 +1,7 @@
 import { eq, and } from "drizzle-orm";
 import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 
-import * as schema from "schema";
+import * as schema from "../schema";
 
 export type dbCharacterOwnership = {
   id: number;

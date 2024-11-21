@@ -1,7 +1,7 @@
 import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { eq, isNotNull, isNull, and, count } from "drizzle-orm";
 
-import * as schema from "schema";
+import * as schema from "../schema";
 import { DbCharacter } from "./character";
 import { DbCorporation } from "./corporation";
 import { DbSeatUserRole } from "./seat_user_role";

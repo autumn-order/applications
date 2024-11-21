@@ -1,7 +1,7 @@
 import { and, eq, inArray, desc, or, count } from "drizzle-orm";
 import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 
-import * as schema from "schema";
+import * as schema from "../schema";
 import { DbUser } from "./user";
 import { DbCharacter } from "./character";
 import { DbCorporation } from "./corporation";

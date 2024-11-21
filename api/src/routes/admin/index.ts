@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { AppHono } from "types";
+import { AppHono } from "../../types";
 
 import applicationRoutes from "./application";
 import userRoutes from "./user";

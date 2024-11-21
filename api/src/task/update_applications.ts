@@ -1,14 +1,15 @@
 import { AUTUMN_CORPORATION_IDS } from "../constants";
-import ApplicationRepository, { GetApplicationResult } from "data/application";
-import { drizzle } from "drizzle-orm/d1";
-import { getCharacterAffiliations } from "utils/eve/character";
-import { ApplicationStatus } from "model/application";
-import CharacterRepository from "data/character";
-import { createEveCorporation } from "service/corporation";
+import ApplicationRepository, {
+  GetApplicationResult,
+} from "../data/application";
+import { getCharacterAffiliations } from "../utils/eve/character";
+import { ApplicationStatus } from "../model/application";
+import CharacterRepository from "../data/character";
+import { createEveCorporation } from "../service/corporation";
 import {
   sendExpiredApplicationNotification,
   sendJoinedApplicationNotification,
-} from "service/webhook";
+} from "../service/webhook";
 import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 
 export default async function updateApplications(

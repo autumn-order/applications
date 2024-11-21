@@ -1,7 +1,7 @@
 import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { eq, inArray } from "drizzle-orm";
 
-import * as schema from "schema";
+import * as schema from "../schema";
 
 export type DbCorporation = {
   id?: number;
