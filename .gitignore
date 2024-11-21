@@ -1,6 +1,6 @@
 # prod
 dist/
-sqlite.db
+db.sqlite
 
 # deps
 node_modules/
