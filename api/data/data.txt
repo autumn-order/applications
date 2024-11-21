@@ -1,1 +1,1 @@
-sqlite.db will generated here when running the application
+db.sqlite will be generated here after running migrations
