@@ -4,8 +4,7 @@ import { AppHono } from "./types";
 import cron from "node-cron";
 import dotenv from "dotenv";
 import { CookieStore, sessionMiddleware } from "hono-sessions";
-import { drizzle } from "drizzle-orm/better-sqlite3";
-import Database from "better-sqlite3";
+import { drizzle } from "drizzle-orm/libsql";
 
 import joinRoutes from "./routes/join";
 
@@ -34,8 +33,11 @@ const app: AppHono = new Hono();
 const store = new CookieStore();
 const thirty_minutes = 30 * 60;
 
-const sqlite = new Database("./data/db.sqlite");
-const db = drizzle(sqlite);
+const db = drizzle({
+  connection: {
+    url: "file:./data/db.sqlite",
+  },
+});
 
 app.use(
   "*",
@@ -61,8 +63,8 @@ app.use(
   }),
 );
 
-app.use("*", async (c, next) => {
-  c.set("db", db);
+app.use("*", async (ctx, next) => {
+  ctx.set("db", db);
   await next();
 });
 

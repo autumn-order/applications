@@ -1,5 +1,5 @@
 import { like, desc, inArray, eq, and, sql, count } from "drizzle-orm";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 
 import * as schema from "../schema";
 
@@ -15,9 +15,9 @@ export type DbSeatRoleFilters = Pick<DbSeatRole, "id"> & {
 };
 
 export default class SeatRoleRepository {
-  private db: BetterSQLite3Database<Record<string, never>>;
+  private db: LibSQLDatabase<Record<string, never>>;
 
-  constructor(db: BetterSQLite3Database<Record<string, never>>) {
+  constructor(db: LibSQLDatabase<Record<string, never>>) {
     this.db = db;
   }
 

@@ -1,6 +1,6 @@
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { Hono, Context as HonoContext } from "hono";
 import { Session } from "hono-sessions";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 
 export type Result<T> =
   | { success: true; data: T }
@@ -9,7 +9,7 @@ export type Result<T> =
 type SessionVariables = {
   session: Session<SessionDataTypes>;
   session_key_rotation: boolean;
-  db: BetterSQLite3Database;
+  db: LibSQLDatabase;
 };
 
 export type Context = HonoContext<{

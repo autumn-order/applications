@@ -1,5 +1,5 @@
 import CharacterRepository, { DbCharacter } from "../data/character";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 import {
   getCharacterAffiliations,
   getCharacterInfo,
@@ -7,7 +7,7 @@ import {
 import { createEveCorporation } from "./corporation";
 
 export async function updateCharacterAffiliations(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   character_ids: number[],
 ): Promise<DbCharacter[]> {
   const characterRepository = new CharacterRepository(db);
@@ -63,7 +63,7 @@ export async function updateCharacterAffiliations(
 }
 
 export async function createEveCharacter(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   character_id: number,
   character_name?: string,
 ): Promise<DbCharacter> {

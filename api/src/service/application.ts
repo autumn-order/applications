@@ -2,7 +2,7 @@ import ApplicationRepository, {
   GetApplicationResult,
 } from "../data/application";
 import UserRepository from "../data/user";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 import { Context } from "hono";
 import convertToApplicationDto from "../lib/convert_application_to_dto";
 import convertUserToDto from "../lib/convert_user_to_dto";

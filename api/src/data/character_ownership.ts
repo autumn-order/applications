@@ -1,5 +1,5 @@
 import { eq, and } from "drizzle-orm";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 
 import * as schema from "../schema";
 
@@ -17,9 +17,9 @@ export type DbCharacterOwnershipFilters = Pick<
 >;
 
 export default class CharacterOwnershipRepository {
-  private db: BetterSQLite3Database<Record<string, never>>;
+  private db: LibSQLDatabase<Record<string, never>>;
 
-  constructor(db: BetterSQLite3Database<Record<string, never>>) {
+  constructor(db: LibSQLDatabase<Record<string, never>>) {
     this.db = db;
   }
 

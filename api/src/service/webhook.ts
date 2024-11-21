@@ -1,6 +1,6 @@
 import SettingRepository from "../data/setting";
 import { MessageBuilder, Webhook } from "discord-webhook-node";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 import { ApplicationLocation } from "../model/application";
 import { GetApplicationResult } from "../data/application";
 import { UserDto } from "../model/user";
@@ -46,7 +46,7 @@ function getCorpInfo(location: string): {
 }
 
 export async function sendNewApplicationNotification(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   application: GetApplicationResult,
 ): Promise<void> {
   const application_frontend_url = process.env.APPLICATION_FRONTEND_URL;
@@ -70,7 +70,7 @@ export async function sendNewApplicationNotification(
 
   const embed = new MessageBuilder()
     .setTitle("New Application")
-    .setUrl(
+    .setURL(
       `${application_frontend_url}/admin/applications/${application.application.id}`,
     )
     .setAuthor(
@@ -89,7 +89,7 @@ export async function sendNewApplicationNotification(
 }
 
 export async function sendReviewReadyApplicationNotification(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   application: GetApplicationResult,
 ): Promise<void> {
   const application_frontend_url = process.env.APPLICATION_FRONTEND_URL;
@@ -113,7 +113,7 @@ export async function sendReviewReadyApplicationNotification(
 
   const embed = new MessageBuilder()
     .setTitle("Application Ready for Review")
-    .setUrl(
+    .setURL(
       `${application_frontend_url}/admin/applications/${application.application.id}`,
     )
     .setAuthor(
@@ -131,7 +131,7 @@ export async function sendReviewReadyApplicationNotification(
 }
 
 export async function sendAcceptedApplicationNotification(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   application: GetApplicationResult,
   reviewer: UserDto,
 ): Promise<void> {
@@ -156,7 +156,7 @@ export async function sendAcceptedApplicationNotification(
 
   const embed = new MessageBuilder()
     .setTitle("Application Accepted")
-    .setUrl(
+    .setURL(
       `${application_frontend_url}/admin/applications/${application.application.id}`,
     )
     .setAuthor(
@@ -177,7 +177,7 @@ export async function sendAcceptedApplicationNotification(
 }
 
 export async function sendRejectedApplicationNotification(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   application: GetApplicationResult,
   reviewer: UserDto,
 ): Promise<void> {
@@ -202,7 +202,7 @@ export async function sendRejectedApplicationNotification(
 
   const embed = new MessageBuilder()
     .setTitle("Application Rejected")
-    .setUrl(
+    .setURL(
       `${application_frontend_url}/admin/applications/${application.application.id}`,
     )
     .setAuthor(
@@ -224,7 +224,7 @@ export async function sendRejectedApplicationNotification(
 }
 
 export async function sendExpiredApplicationNotification(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   application: GetApplicationResult,
 ): Promise<void> {
   const application_frontend_url = process.env.APPLICATION_FRONTEND_URL;
@@ -248,7 +248,7 @@ export async function sendExpiredApplicationNotification(
 
   const embed = new MessageBuilder()
     .setTitle("Application Expired")
-    .setUrl(
+    .setURL(
       `${application_frontend_url}/admin/applications/${application.application.id}`,
     )
     .setAuthor(
@@ -266,7 +266,7 @@ export async function sendExpiredApplicationNotification(
 }
 
 export async function sendJoinedApplicationNotification(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   application: GetApplicationResult,
 ): Promise<void> {
   const application_frontend_url = process.env.APPLICATION_FRONTEND_URL;
@@ -290,7 +290,7 @@ export async function sendJoinedApplicationNotification(
 
   const embed = new MessageBuilder()
     .setTitle("Applicant Joined")
-    .setUrl(
+    .setURL(
       `${application_frontend_url}/admin/applications/${application.application.id}`,
     )
     .setAuthor(

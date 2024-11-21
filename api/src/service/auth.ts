@@ -2,7 +2,7 @@ import CharacterOwnershipRepository, {
   dbCharacterOwnership,
 } from "../data/character_ownership";
 import UserRepository, { DbUser } from "../data/user";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 import fetchSeatCharacterUserId from "../utils/seat/character";
 import { fetchSeatUser } from "../utils/seat/user";
 import { createEveCharacter } from "./character";
@@ -12,7 +12,7 @@ import { DbCharacter } from "../data/character";
 import { Permissions } from "../model/permission";
 
 async function syncSeatUser(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   character_id: number,
 ): Promise<DbUser | number | null> {
   const userRepository = new UserRepository(db);
@@ -66,7 +66,7 @@ async function syncSeatUser(
 }
 
 async function getExistingUser(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   user_id: number,
   character_id: number,
 ): Promise<DbUser> {
@@ -105,7 +105,7 @@ async function getExistingUser(
 }
 
 async function createNewUser(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   owner_hash: string,
   character_id: number,
   character_name: string,
@@ -181,7 +181,7 @@ async function createNewUser(
 }
 
 export async function getOrCreateUser(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   owner_hash: string,
   character_id: number,
   character_name: string,

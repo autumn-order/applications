@@ -5,7 +5,7 @@ import SeatRoleRepository, {
 import SeatRoleUserRepository, { DbSeatUserRole } from "../data/seat_user_role";
 import UserRepository from "../data/user";
 import { fetchSeatRoleDetails, fetchSeatRoles } from "../utils/seat/role";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 
 interface RoleUserEntries {
   role_id: number;
@@ -13,7 +13,7 @@ interface RoleUserEntries {
 }
 
 async function updateSeatRoles(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
 ): Promise<DbSeatRole[]> {
   const roles = await fetchSeatRoles(1);
 
@@ -109,7 +109,7 @@ async function getRoleUsers(
 }
 
 async function updateSeatRoleUsers(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   existing_roles: DbSeatRole[],
 ) {
   const userRepository = new UserRepository(db);
@@ -152,7 +152,7 @@ async function updateSeatRoleUsers(
 }
 
 export default async function syncSeatRoles(
-  db: BetterSQLite3Database,
+  db: LibSQLDatabase,
 ): Promise<string> {
   const existing_roles = await updateSeatRoles(db);
   await updateSeatRoleUsers(db, existing_roles);

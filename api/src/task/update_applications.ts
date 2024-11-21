@@ -10,10 +10,10 @@ import {
   sendExpiredApplicationNotification,
   sendJoinedApplicationNotification,
 } from "../service/webhook";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 
 export default async function updateApplications(
-  db: BetterSQLite3Database,
+  db: LibSQLDatabase,
 ): Promise<string> {
   const applicationRepository = new ApplicationRepository(db);
   const characterRepository = new CharacterRepository(db);

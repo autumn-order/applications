@@ -1,10 +1,10 @@
 import PermissionRepository from "../data/permission";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 import { Permissions, RolePermissionsDto } from "../model/permission";
 import { Context } from "../types";
 
 export async function getRolePermissions(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   ctx: Context,
   seat_role_id: number,
   page: number,

@@ -2,7 +2,7 @@ import { ZkillCorporationStats } from "../model/zkill";
 import { Result } from "../types";
 import StatsRepository, { CreateStatsEntry } from "../data/stats";
 import { AUTUMN_CORPORATION_IDS, USER_AGENT } from "../constants";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 
 const ZKILL_CORPORATION_STATS_URL =
   "https://zkillboard.com/api/stats/corporationID";
@@ -43,7 +43,7 @@ async function fetchZkillCorporationStats(
 }
 
 export default async function updateCorporationStats(
-  db: BetterSQLite3Database,
+  db: LibSQLDatabase,
 ): Promise<void> {
   const statsRepository = new StatsRepository(db);
 

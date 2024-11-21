@@ -2,11 +2,11 @@ import CorporationRepository, {
   DbCorporation,
   DbCreateCorporation,
 } from "../data/corporation";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 import { getCorporationInfo } from "../utils/eve/corporation";
 
 export async function createEveCorporation(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   corporation_id: number,
 ): Promise<DbCorporation> {
   const corporationRepository = new CorporationRepository(db);

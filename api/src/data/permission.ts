@@ -1,4 +1,4 @@
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 import { eq, and, count } from "drizzle-orm";
 
 import * as schema from "../schema";
@@ -10,9 +10,9 @@ export type DbPermission = {
 };
 
 export default class PermissionRepository {
-  private db: BetterSQLite3Database<Record<string, never>>;
+  private db: LibSQLDatabase<Record<string, never>>;
 
-  constructor(db: BetterSQLite3Database<Record<string, never>>) {
+  constructor(db: LibSQLDatabase<Record<string, never>>) {
     this.db = db;
   }
 

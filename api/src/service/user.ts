@@ -2,8 +2,9 @@ import CharacterRepository, {
   DbCharacter,
   DbCharacterFilters,
 } from "../data/character";
+import { CharacterDto } from "../model/character";
 import { GetUserRolesDto, UserCharactersDto, UserRoleDto } from "../model/user";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 import UserRepository, { DbUser } from "../data/user";
 import { dbCharacterOwnership } from "../data/character_ownership";
 import { DbCorporation } from "../data/corporation";
@@ -18,7 +19,7 @@ interface TempUserData {
 }
 
 export async function getUserCharacters(
-  db: BetterSQLite3Database<Record<string, never>>,
+  db: LibSQLDatabase<Record<string, never>>,
   filters: Partial<DbCharacterFilters>,
   limit: number,
   page: number,

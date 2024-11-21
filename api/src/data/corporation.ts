@@ -1,4 +1,4 @@
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { LibSQLDatabase } from "drizzle-orm/libsql";
 import { eq, inArray } from "drizzle-orm";
 
 import * as schema from "../schema";
@@ -12,9 +12,9 @@ export type DbCorporation = {
 export type DbCreateCorporation = Omit<DbCorporation, "id">;
 
 export default class CorporationRepository {
-  private db: BetterSQLite3Database<Record<string, never>>;
+  private db: LibSQLDatabase<Record<string, never>>;
 
-  constructor(db: BetterSQLite3Database<Record<string, never>>) {
+  constructor(db: LibSQLDatabase<Record<string, never>>) {
     this.db = db;
   }
 
