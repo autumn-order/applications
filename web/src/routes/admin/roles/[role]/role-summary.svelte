@@ -18,8 +18,7 @@
 	<Card.Content class="flex flex-col gap-4">
 		<ul class="flex justify-evenly">
 			<li>
-				Members: <span class="bg-neutral-800 rounded-lg px-1.5 dark:text-white"
-					>{role.member_count}</span
+				Members: <span class="bg-neutral-800 rounded-lg px-1.5 text-white">{role.member_count}</span
 				>
 			</li>
 		</ul>
