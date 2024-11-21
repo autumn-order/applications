@@ -1,0 +1,25 @@
+{
+  "name": "autumn-applications-api",
+  "scripts": {
+    "dev": "nodemon src/index.ts"
+  },
+  "dependencies": {
+    "@hono/zod-validator": "^0.4.1",
+    "@types/node-cron": "^3.0.11",
+    "better-sqlite3": "^11.5.0",
+    "discord-webhook-node": "github:hyziri/discord-webhook-node",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.34.1",
+    "hono": "^4.6.5",
+    "hono-sessions": "^0.6.1",
+    "node-cron": "^3.0.3",
+    "npm": "^10.9.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.9.1",
+    "drizzle-kit": "^0.25.0",
+    "nodemon": "^2.0.22"
+  }
+}

@@ -1,0 +1,1 @@
+ALTER TABLE `application` ADD `questions_completed` integer DEFAULT 0 NOT NULL;
