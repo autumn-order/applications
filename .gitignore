@@ -1,10 +1,12 @@
 # prod
 dist/
 db.sqlite
+build
+web/.svelte-kit/*
+!web/.svelte-kit/tsconfig.json
 
 # deps
 node_modules/
-.svelte-kit
 
 # env
 .env

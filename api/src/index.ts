@@ -5,6 +5,7 @@ import cron from "node-cron";
 import dotenv from "dotenv";
 import { CookieStore, sessionMiddleware } from "hono-sessions";
 import { drizzle } from "drizzle-orm/libsql";
+import { serve, type HttpBindings } from "@hono/node-server";
 
 import joinRoutes from "./routes/join";
 
@@ -87,4 +88,10 @@ cron.schedule("25 */1 * * *", async () => {
   console.info(result_message);
 });
 
-export default app;
+console.log("Listening on 0.0.0.0:8787");
+
+serve({
+  fetch: app.fetch,
+  port: 8787,
+  hostname: "0.0.0.0",
+});

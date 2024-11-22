@@ -12,6 +12,7 @@ COPY .svelte-kit/tsconfig.json ./.svelte-kit/tsconfig.json
 COPY src ./src
 COPY static ./static
 
+ARG PUBLIC_VITE_BACKEND_URL
 ENV PUBLIC_VITE_BACKEND_URL=${PUBLIC_VITE_BACKEND_URL}
 
 RUN bun run build

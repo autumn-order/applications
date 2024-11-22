@@ -1,11 +1,13 @@
 {
   "name": "autumn-applications-api",
   "scripts": {
+    "start": "bun src/index.ts",
     "dev": "bun --watch src/index.ts",
     "migrations": "npx drizzle-kit migrate",
     "migrations-generate": "npx drizzle-kit generate"
   },
   "dependencies": {
+    "@hono/node-server": "^1.13.7",
     "@libsql/client": "^0.14.0",
     "discord-webhook-node": "github:hyziri/discord-webhook-node",
     "dotenv": "^16.4.5",

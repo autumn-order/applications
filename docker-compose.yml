@@ -1,0 +1,45 @@
+services:
+  autumn-applications-web:
+    build:
+      context: ./web
+      args:
+        PUBLIC_VITE_BACKEND_URL: ${APPLICATION_BACKEND_URL}
+    restart: unless-stopped
+    environment:
+      - PUBLIC_VITE_BACKEND_URL=${APPLICATION_BACKEND_URL}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -f -H 'Accept: text/html' http://localhost:3000 || exit 1",
+        ]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+  autumn-applications-api:
+    build:
+      context: ./api
+    restart: unless-stopped
+    environment:
+      - APPLICATION_NAME=${APPLICATION_NAME}
+      - APPLICATION_EMAIL=${APPLICATION_EMAIL}
+      - APPLICATION_BACKEND_URL=${APPLICATION_BACKEND_URL}
+      - APPLICATION_FRONTEND_URL=${APPLICATION_FRONTEND_URL}
+      - APPLICATION_ENCRYPTION_KEY=${APPLICATION_ENCRYPTION_KEY}
+      - APPLICATION_ADMIN_CHARACTER_ID=${APPLICATION_ADMIN_CHARACTER_ID}
+      - EVE_ESI_CLIENT_ID=${EVE_ESI_CLIENT_ID}
+      - EVE_ESI_SECRET_KEY=${EVE_ESI_SECRET_KEY}
+      - SEAT_DOMAIN=${SEAT_DOMAIN}
+      - SEAT_APPLICATION_KEY=${SEAT_APPLICATION_KEY}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f -H 'http://localhost:8787 || exit 1"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    volumes:
+      - autumn-applications-api:/app/data
+
+volumes:
+  autumn-applications-api:
