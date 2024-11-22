@@ -11,12 +11,12 @@
 <div class="flex flex-col flex-grow gap-2 justify-center items-center h-full w-full p-2 lg:p-6">
 	<div>
 		<enhanced:img
-			src="/static/logo512black.png"
+			src="/static/logo512black.png?w=256&h=256"
 			class="w-64 h-64 block dark:hidden"
 			alt="site logo"
 		/>
 		<enhanced:img
-			src="/static/logo512white.png"
+			src="/static/logo512white.png?w=256&h=256"
 			class="w-64 h-64 hidden dark:block"
 			alt="site logo"
 		/>

@@ -19,7 +19,7 @@ Docker is the recommended and easiest approach for running this application in p
 Running the application
 1. Copy .env.example, set the empty variables and change , `APPLICATION_EMAIL`, `APPLICATION_FRONTEND_URL`, `APPLICATION_BACKEND_URL`, & `SEAT_DOMAIN` to the correct values.
 2. If you haven't already setup [SeAT](https://eveseat.github.io/docs/) and generate an API key at `https://seat.your-domain.com/api-admin` and then set the `SEAT_APPLICATION_KEY` variable in the .env file.
-2. Run the application using
+3. Run the application using
 
 ```bash
 docker-compose up -d

@@ -14,12 +14,12 @@
 			<a href="/" class="flex items-center gap-4">
 				<div>
 					<enhanced:img
-						src="/static/logo512black.png"
+						src="/static/logo512black.png?w=64&h=64"
 						class="w-16 h-16 block dark:hidden"
 						alt="site logo"
 					/>
 					<enhanced:img
-						src="/static/logo512white.png"
+						src="/static/logo512white.png?w=64&h=64"
 						class="w-16 h-16 hidden dark:block"
 						alt="site logo"
 					/>

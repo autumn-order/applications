@@ -6,8 +6,8 @@
 </script>
 
 <svelte:head>
-	<meta name="og:image" content="/logo512white.png" />
-	<meta name="twitter:image" content="/logo512white.png" />
+	<meta name="og:image" content="/logo512white.png?w=512&h=512" />
+	<meta name="twitter:image" content="/logo512white.png?w=512&h=512" />
 </svelte:head>
 
 <main class="primary-bg h-full min-h-screen min-w-screen">

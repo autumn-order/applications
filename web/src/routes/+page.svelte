@@ -51,12 +51,12 @@
 			>
 				<div>
 					<enhanced:img
-						src="/static/logo512black.png"
+						src="/static/logo512black.png?w=256&h=256"
 						class="w-64 h-64 block dark:hidden"
 						alt="site logo"
 					/>
 					<enhanced:img
-						src="/static/logo512white.png"
+						src="/static/logo512white.png?w=256&h=256"
 						class="w-64 h-64 hidden dark:block"
 						alt="site logo"
 					/>
