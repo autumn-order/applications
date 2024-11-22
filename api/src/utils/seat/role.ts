@@ -2,7 +2,7 @@ import { SeatRoleDetailsResponse, SeatRoleResponse } from "./model";
 
 export async function fetchSeatRoles(page: number): Promise<SeatRoleResponse> {
   const seat_domain = process.env.SEAT_DOMAIN;
-  const seat_application_key = process.env.SEAT_APPLICATION_KEY;
+  const seat_application_key = process.env.SEAT_API_TOKEN;
 
   if (!seat_domain) {
     throw new Error("SEAT_DOMAIN not found in environment variables");
@@ -37,7 +37,7 @@ export async function fetchSeatRoleDetails(
   role_id: number,
 ): Promise<SeatRoleDetailsResponse> {
   const seat_domain = process.env.SEAT_DOMAIN;
-  const seat_application_key = process.env.SEAT_APPLICATION_KEY;
+  const seat_application_key = process.env.SEAT_API_TOKEN;
 
   if (!seat_domain) {
     throw new Error("SEAT_DOMAIN not found in environment variables");

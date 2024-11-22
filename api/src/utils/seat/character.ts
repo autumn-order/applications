@@ -8,7 +8,7 @@ export default async function fetchSeatCharacterUserId(
   character_id: number,
 ): Promise<number | null> {
   const seat_domain = process.env.SEAT_DOMAIN;
-  const seat_application_key = process.env.SEAT_APPLICATION_KEY;
+  const seat_application_key = process.env.SEAT_API_TOKEN;
 
   if (!seat_domain) {
     throw new Error("SEAT_DOMAIN not found in environment variables");

@@ -2,7 +2,7 @@ export const AUTUMN_CORPORATION_IDS: number[] = [98785281, 98784256];
 
 export const USER_AGENT = (): string => {
   const application_name = process.env.APPLICATION_NAME;
-  const application_email = process.env.APPLICATION_EMAIL;
+  const application_email = process.env.ESI_CONTACT_EMAIL;
 
   if (!application_name) {
     throw new Error("APPLICATION_NAME is not set");

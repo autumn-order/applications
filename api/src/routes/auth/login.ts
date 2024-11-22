@@ -47,7 +47,7 @@ const logoutRoute: AppHono = new Hono();
 
 loginRoute.get("/", async (ctx: Context) => {
   const application_url = process.env.APPLICATION_BACKEND_URL;
-  const eve_esi_client_id = process.env.EVE_ESI_CLIENT_ID;
+  const eve_esi_client_id = process.env.ESI_CLIENT_ID;
 
   if (!application_url) {
     throw new Error("APPLICATION_BACKEND_URL is not set");
@@ -75,8 +75,8 @@ loginRoute.get("/", async (ctx: Context) => {
 
 callbackRoute.get("/", async (ctx: Context) => {
   const application_frontend_url = process.env.APPLICATION_FRONTEND_URL;
-  const client_id = process.env.EVE_ESI_CLIENT_ID;
-  const client_secret = process.env.EVE_ESI_SECRET_KEY;
+  const client_id = process.env.ESI_CLIENT_ID;
+  const client_secret = process.env.ESI_SECRET_KEY;
 
   if (!client_id) {
     throw new Error("EVE_ESI_CLIENT_ID is not set");
