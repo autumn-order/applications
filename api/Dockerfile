@@ -10,12 +10,9 @@ RUN bun i
 COPY drizzle.config.ts tsconfig.json ./
 COPY src ./src
 COPY drizzle ./drizzle
-COPY data ./data
-
-RUN bun run migrations
 
 ENV NODE_ENV=production
 
 EXPOSE 8787
 
-CMD [ "bun", "run", "start" ]
+CMD ["sh", "-c", "bun run migrations && bun run start"]

@@ -33,13 +33,17 @@ services:
       - SEAT_DOMAIN=${SEAT_DOMAIN}
       - SEAT_APPLICATION_KEY=${SEAT_APPLICATION_KEY}
     healthcheck:
-      test: ["CMD-SHELL", "curl -f -H 'http://localhost:8787 || exit 1"]
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s -o /dev/null -w '%{http_code}' http://localhost:8787/auth/user | grep -q '401' || exit 1",
+        ]
       interval: 1m
       timeout: 10s
       retries: 3
       start_period: 40s
     volumes:
-      - autumn-applications-api:/app/data
+      - autumn-applications:/app/data
 
 volumes:
-  autumn-applications-api:
+  autumn-applications:
