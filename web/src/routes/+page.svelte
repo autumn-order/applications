@@ -42,7 +42,7 @@
 
 <Header />
 <div class="flex justify-center h-full min-h-screen pt-[88px]">
-	<section class="border-color flex w-full max-w-[1440px] border-x">
+	<section class="border-color flex w-full max-w-[1440px] xl:border-x">
 		{#if user === undefined || user !== null}
 			<LoadingMessage message={'Loading'} />
 		{:else}
