@@ -32,13 +32,13 @@
 	</h1>
 	<div>
 		<enhanced:img
-			class="block dark:hidden w-80 h-16 mx-auto my-4"
-			src="/static/images/application/discord-logo-black.png?w=320&h=64"
+			class="block dark:hidden w-80 h-[61px] mx-auto my-4"
+			src="/static/images/application/discord-logo-black.png?w=320&h=61"
 			alt="SeAT logo"
 		/>
 		<enhanced:img
-			class="hidden dark:block w-80 h-16 mx-auto my-4"
-			src="/static/images/application/discord-logo-white.png?w=320&h=64"
+			class="hidden dark:block w-80 h-[61px] mx-auto my-4"
+			src="/static/images/application/discord-logo-white.png?w=320&h=61"
 			alt="SeAT logo"
 		/>
 	</div>
@@ -84,8 +84,8 @@
 					going forward.
 				</li>
 				<li>
-					2. Go to <a class="link-color" href="https://seat.autumn-order.space/" target="_blank"
-						>https://seat.autumn-order.space/</a
+					2. Go to <a class="link-color" href="https://seat.autumn-order.com" target="_blank"
+						>https://seat.autumn-order.com</a
 					>
 					and click <b>LOG IN with EVE Online</b> if you aren't signed in already.
 				</li>
@@ -93,7 +93,7 @@
 					<p>
 						3. Go to the <a
 							class="link-color"
-							href="https://seat.black-rose.space/seat-connector/identities"
+							href="https://seat.autumn-order.com/seat-connector/identities"
 							target="_blank">connectors tab on the left sidebar</a
 						>
 						and click <b>Join Server</b> under Discord.
