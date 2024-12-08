@@ -184,7 +184,8 @@ export default class ApplicationRepository {
         schema.Language,
         eq(schema.Application.id, schema.Language.application_id),
       )
-      .where(inArray(schema.Application.id, subquery));
+      .where(inArray(schema.Application.id, subquery))
+      .orderBy(desc(schema.Application.last_updated));
 
     const result: {
       application: DbApplication;
