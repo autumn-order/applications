@@ -19,6 +19,7 @@
 	import type { Unsubscriber } from 'svelte/store';
 	import { getUser } from '$lib/stores/user';
 	import type { UserDto } from '$lib/model/user';
+	import { APPLICATION_FILTERS } from '$lib/stores/admin-application-filters';
 
 	import { PUBLIC_VITE_BACKEND_URL } from '$env/static/public';
 
@@ -110,6 +111,8 @@
 			filters.status = undefined;
 			applicationData = await fetchApplications(filters, page, entries_per_page);
 		}
+
+		APPLICATION_FILTERS.set(filters as ApplicationFilters);
 	}
 
 	async function handleLocationFilter(
@@ -124,6 +127,8 @@
 			filters.location = undefined;
 			applicationData = await fetchApplications(filters, page, entries_per_page);
 		}
+
+		APPLICATION_FILTERS.set(filters as ApplicationFilters);
 	}
 
 	async function handleDiscordFilter(object: Selected<boolean | undefined> | undefined) {
@@ -136,6 +141,8 @@
 			filters.discord_completed = undefined;
 			applicationData = await fetchApplications(filters, page, entries_per_page);
 		}
+
+		APPLICATION_FILTERS.set(filters as ApplicationFilters);
 	}
 
 	async function handleSeatFilter(object: Selected<boolean | undefined> | undefined) {
@@ -148,6 +155,8 @@
 			filters.seat_completed = undefined;
 			applicationData = await fetchApplications(filters, page, entries_per_page);
 		}
+
+		APPLICATION_FILTERS.set(filters as ApplicationFilters);
 	}
 
 	const debounce = <T extends (...args: any[]) => void>(
@@ -165,6 +174,8 @@
 		if (target) {
 			filters.character = target.value;
 			applicationData = await fetchApplications(filters, page, entries_per_page);
+
+			APPLICATION_FILTERS.set(filters as ApplicationFilters);
 		}
 	}, 300);
 
@@ -185,9 +196,14 @@
 					user.permissions.includes(Permissions.ViewApplication) ||
 					user.permissions.includes(Permissions.Admin)
 				) {
-					(async () => {
+					let applicationUnsubscribe = APPLICATION_FILTERS.subscribe(async (value) => {
+						filters = value ? value : {};
 						applicationData = await fetchApplications(filters, page, entries_per_page);
-					})();
+					});
+
+					return () => {
+						applicationUnsubscribe();
+					};
 				} else {
 					status_code = 403;
 					error_message = 'You do not have permission to access this page';
@@ -207,6 +223,7 @@
 	let loaded = false;
 
 	let filters: Partial<ApplicationFilters> = {};
+
 	let page = 1;
 	let entries_per_page = 10;
 	let debounceTimeout: ReturnType<typeof setTimeout>;
@@ -252,10 +269,16 @@
 						<div class="flex gap-2 flex-wrap">
 							<Select.Root onSelectedChange={handleSeatFilter}>
 								<Select.Trigger class="w-36">
-									<Select.Value placeholder="SeAT Status" />
+									<Select.Value
+										placeholder={filters.seat_completed != undefined
+											? filters.seat_completed
+												? 'Completed'
+												: 'Incomplete'
+											: 'Discord Status'}
+									/>
 								</Select.Trigger>
 								<Select.Content>
-									<Select.Label>Discord Status</Select.Label>
+									<Select.Label>SeAT Status</Select.Label>
 									<Select.Item value={undefined}>Any</Select.Item>
 									<Select.Item value={true}>Completed</Select.Item>
 									<Select.Item value={false}>Incomplete</Select.Item>
@@ -263,7 +286,13 @@
 							</Select.Root>
 							<Select.Root onSelectedChange={handleDiscordFilter}>
 								<Select.Trigger class="w-36">
-									<Select.Value placeholder="Discord Status" />
+									<Select.Value
+										placeholder={filters.discord_completed != undefined
+											? filters.discord_completed
+												? 'Completed'
+												: 'Incomplete'
+											: 'Discord Status'}
+									/>
 								</Select.Trigger>
 								<Select.Content>
 									<Select.Label>Discord Status</Select.Label>
@@ -274,7 +303,9 @@
 							</Select.Root>
 							<Select.Root onSelectedChange={handleStatusFilter}>
 								<Select.Trigger class="w-32">
-									<Select.Value placeholder="Status" />
+									<Select.Value
+										placeholder={filters.status != undefined ? filters.status : 'Status'}
+									/>
 								</Select.Trigger>
 								<Select.Content>
 									<Select.Label>Status</Select.Label>
@@ -298,7 +329,9 @@
 							</Select.Root>
 							<Select.Root onSelectedChange={handleLocationFilter}>
 								<Select.Trigger class="w-32">
-									<Select.Value placeholder="Location" />
+									<Select.Value
+										placeholder={filters.location != undefined ? filters.location : 'Location'}
+									/>
 								</Select.Trigger>
 								<Select.Content>
 									<Select.Label>Location</Select.Label>
@@ -311,7 +344,11 @@
 									>
 								</Select.Content>
 							</Select.Root>
-							<Input placeholder="Search" class="w-56" on:input={handleCharacterFilter} />
+							<Input
+								placeholder={filters.character != undefined ? filters.character : 'Search'}
+								class="w-56"
+								on:input={handleCharacterFilter}
+							/>
 						</div>
 					</div>
 					<Table applications={applicationData.applications} />
